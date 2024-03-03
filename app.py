@@ -55,5 +55,11 @@ def get_tweets():
         
     return jsonify(enriched_tweets)
 
+# New endpoint to fetch geocode cache results
+@app.route('/geocode-cache', methods=['GET'])
+def get_geocode_cache():
+    cache_results = list(geocode_cache.find({}, {'_id': 0}))  # Omit the MongoDB ID from the response
+    return jsonify(cache_results)
+
 if __name__ == '__main__':
     app.run(debug=True)
