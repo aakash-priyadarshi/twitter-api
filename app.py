@@ -17,6 +17,8 @@ client = MongoClient(mongo_uri)
 db = client['twitter_database']
 tweets_collection = db['coronavirus_tweets']
 geocode_cache = db['geocode_cache']  # Collection for caching geocode results
+vaccine_data_dose1 = db['vaccine_data_dose1']
+vaccine_data_dose2 = db['vaccine_data_dose2']
 
 def geocode_address(address):
     # Check cache first
@@ -62,6 +64,17 @@ def get_tweets():
 def get_geocode_cache():
     cache_results = list(geocode_cache.find({}, {'_id': 0}))  # Omit the MongoDB ID from the response
     return jsonify(cache_results)
+
+@app.route('/vaccine-data-dose1', methods=['GET'])
+def get_vaccine_data_dose1():
+    data = list(vaccine_data_dose1.find({}, {'_id': 0}))  # Omit the MongoDB ID from the response
+    return jsonify(data)
+
+# New endpoint to fetch vaccine data dose 2
+@app.route('/vaccine-data-dose2', methods=['GET'])
+def get_vaccine_data_dose2():
+    data = list(vaccine_data_dose2.find({}, {'_id': 0}))  # Omit the MongoDB ID from the response
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
