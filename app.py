@@ -17,8 +17,8 @@ client = MongoClient(mongo_uri)
 db = client['twitter_database']
 tweets_collection = db['coronavirus_tweets']
 geocode_cache = db['geocode_cache']  # Collection for caching geocode results
-vaccine_data_dose1 = db['vaccine data dose1']
-vaccine_data_dose2 = db['vaccine data dose2']
+vaccine_data_dose1 = db['vaccine data dose 1']
+vaccine_data_dose2 = db['vaccine data dose 2']
 
 def geocode_address(address):
     # Check cache first
